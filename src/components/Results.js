@@ -3,10 +3,44 @@ import { connect } from 'react-redux';
 
 class Results extends Component {
 
+  renderResults = () => {
+    if (this.props.results === null)
+      return (
+        <p>No search results.</p>
+      )
+    else if (this.props.results.Response === 'True'){
+      return (
+        <ul>{this.mapThroughResults()}</ul>
+      )
+    } else 
+    return (
+    <p>{this.props.results.Error}</p>
+    )
+  }
+
+  mapThroughResults = () => {
+    if (this.props.results.Search) {
+      return this.props.results.Search.map(result => {
+        return(
+          <li key={result.imdbID}>
+            {result.Title} ({result.Year})
+            <button>Watch later</button>
+          </li>
+          )
+        }
+      )
+    } else {
+      return (
+        <p>No search results yet.</p>
+      )
+    }
+  }
+
   render() {
     return (
       <div>
         <p>Results for {this.props.searchQuery}</p>
+        {this.renderResults()}
       </div>
     )
   }
@@ -15,7 +49,8 @@ class Results extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    searchQuery: store.searchQuery
+    searchQuery: store.searchQuery,
+    results: store.results
   }
 }
 
