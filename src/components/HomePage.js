@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
-import Shows from './Results';
+import Results from './Results';
 
 class HomePage extends Component {
 
@@ -9,7 +9,7 @@ class HomePage extends Component {
       <div>
         <h1>MyFlix</h1>
         <SearchBar />
-        <Shows />
+        <Results />
       </div>
     )
   }
