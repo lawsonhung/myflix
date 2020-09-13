@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
-import Shows from './Shows';
+import Shows from './Results';
 
 class HomePage extends Component {
 
