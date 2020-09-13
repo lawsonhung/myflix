@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-import Shows from './components/Shows';
+import HomePage from './components/HomePage';
 import './App.css';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1>MyFlix</h1>
-        <Shows />
-      </div>
+      <Switch>
+
+        <Route path={'/'}
+          render={(routerProps) => <HomePage 
+            routerProps={routerProps} />} />
+
+      </Switch>
     )
   }
 }
 
-export default App;
+export default withRouter(App);
