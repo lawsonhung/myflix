@@ -1,3 +1,5 @@
+Inspired by a code challenge.
+
 ## Dependencies
 
 Redux:
