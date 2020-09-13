@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SearchBar from './SearchBar';
 import Shows from './Shows';
 
 class HomePage extends Component {
@@ -7,6 +8,7 @@ class HomePage extends Component {
     return (
       <div>
         <h1>MyFlix</h1>
+        <SearchBar />
         <Shows />
       </div>
     )
