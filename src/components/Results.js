@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class Shows extends Component {
+class Results extends Component {
 
   render() {
     return (
@@ -19,4 +19,4 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Shows)
+export default connect(mapStateToProps, null)(Results)
