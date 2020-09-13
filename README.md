@@ -1,5 +1,9 @@
 ## Dependencies
 
+Redux:
+
+### `npm install redux`
+
 React-Redux:
 
 ### `npm install react-redux`
