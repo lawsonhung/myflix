@@ -8,6 +8,7 @@ import storage from 'redux-persist/lib/storage';
 import { createStore } from 'redux';
 import rootReducer from './reducers/rootReducer';
 import { persistStore, persistReducer } from 'redux-persist';
+import { BrowserRouter } from 'react-router-dom';
 
 const persistConfig = {
   key: 'root',
@@ -21,7 +22,9 @@ const persistor = persistStore(lawsonsStore);
 ReactDOM.render(
   <Provider store={lawsonsStore}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </PersistGate>
   </Provider>,
   document.getElementById('root')
