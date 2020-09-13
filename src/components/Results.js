@@ -23,6 +23,7 @@ class Results extends Component {
       return this.props.results.Search.map(result => {
         return(
           <li key={result.imdbID}>
+            <img src={result.Poster} alt={`${result.Title} poster`} />
             {result.Title} ({result.Year})
             <button>Watch later</button>
           </li>
