@@ -3,6 +3,14 @@ import { connect } from 'react-redux';
 
 class Results extends Component {
 
+  renderResultCt = () => {
+    const resultCt = this.props.results.totalResults;
+    if (resultCt)
+      return (
+        <p>There are {resultCt} result(s) in total.</p>
+      );
+  }
+
   renderResults = () => {
     if (this.props.results === null)
       return (
@@ -15,7 +23,7 @@ class Results extends Component {
     } else 
     return (
     <p>{this.props.results.Error}</p>
-    )
+    );
   }
 
   mapThroughResults = () => {
@@ -23,9 +31,10 @@ class Results extends Component {
       return this.props.results.Search.map(result => {
         return(
           <li key={result.imdbID}>
-            <img src={result.Poster} alt={`${result.Title} poster`} />
+            {/* <img src={result.Poster} alt={`${result.Title} poster`} />
+            <br /> */}
             {result.Title} ({result.Year})
-            <button>Watch later</button>
+            <button onClick={(e) => this.addToWatchLater(e, result)}>Watch later</button>
           </li>
           )
         }
@@ -33,14 +42,20 @@ class Results extends Component {
     } else {
       return (
         <p>No search results yet.</p>
-      )
+      );
     }
+  }
+
+  addToWatchLater = (e, show) => {
+    e.target.disabled = true;
+    this.props.addToWatchLater(show);
   }
 
   render() {
     return (
       <div>
         <p>Results for {this.props.searchQuery}</p>
+        {this.renderResultCt()}
         {this.renderResults()}
       </div>
     )
@@ -55,4 +70,15 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Results)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToWatchLater: (show) => {
+      dispatch({
+        type: 'ADD_TO_WATCH_LATER',
+        show: show
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results)
