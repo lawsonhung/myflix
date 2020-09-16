@@ -34,7 +34,7 @@ class Results extends Component {
             {/* <img src={result.Poster} alt={`${result.Title} poster`} />
             <br /> */}
             {result.Title} ({result.Year})
-            <button onClick={(e) => this.addToWatchLater(e, result)}>Watch later</button>
+            <button id={`${result.imdbID} button`} onClick={(e) => this.addToWatchLater(e, result)}>Watch later</button>
           </li>
           )
         }
@@ -51,12 +51,32 @@ class Results extends Component {
     this.props.addToWatchLater(show);
   }
 
+  disableButtons = () => {
+    this.props.watchLater.map(watchLaterShow => {
+      const button = document.getElementById(`${watchLaterShow.imdbID} button`);
+      if (button) {
+        button.disabled = true;
+        button.classList.add('disabled');
+      }
+      return null;
+    })
+  }
+
+  componentDidMount = () => {
+    this.disableButtons();
+  }
+
+  componentDidUpdate = () => {
+    this.disableButtons();
+  }
+
   render() {
     return (
       <div>
         <p>Results for {this.props.searchQuery}</p>
         {this.renderResultCt()}
         {this.renderResults()}
+        {/* {this.disableButtons()} */}
       </div>
     )
   }
@@ -66,7 +86,8 @@ class Results extends Component {
 const mapStateToProps = (store) => {
   return {
     searchQuery: store.searchQuery,
-    results: store.results
+    results: store.results,
+    watchLater: store.watchLater
   }
 }
 

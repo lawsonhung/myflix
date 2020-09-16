@@ -1,7 +1,7 @@
 export default (state = {
   searchQuery: '',
   results: [],
-  watchLater: ["Green Cucumber"],
+  watchLater: [],
 }, action) => {
   switch (action.type) {
     case 'UPDATE_SEARCH_QUERY':
@@ -19,7 +19,7 @@ export default (state = {
     case 'ADD_TO_WATCH_LATER':
       return {
         ...state,
-        // watchLater: ["Green Cucumber"],
+        // watchLater: [],
         watchLater: [...state.watchLater, action.show]
       }
 
