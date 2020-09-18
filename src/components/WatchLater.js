@@ -7,16 +7,22 @@ class WatchLater extends Component {
     console.log(this.props.watchLater);
     return(
       <ul>
-        {this.props.watchLater.map(show => {
+        {this.props.watchLater.map((show, showIndex) => {
           return(
             <li key={show.imdbID}>
               {show.Title} ({show.Year})
-              <button onClick={() => this.removeFromWatchLater(show)}>Remove</button>
+              <button onClick={() => this.removeFromWatchLater(showIndex, show.imdbID)}>Remove</button>
             </li>
           )
         })}
       </ul>
     )
+  }
+
+  removeFromWatchLater = (showIndex, showID) => {
+    const button = document.getElementById(`${showID} button`)
+    this.props.removeFromWatchLater(showIndex);
+    if (button) button.disabled = false;
   }
 
   render() {
@@ -36,4 +42,15 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps, null)(WatchLater)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeFromWatchLater: (watchLaterIndex) => {
+      dispatch({
+        type: 'REMOVE_FROM_WATCH_LATER',
+        watchLaterIndex: watchLaterIndex
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WatchLater)
