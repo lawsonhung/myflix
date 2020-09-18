@@ -23,6 +23,15 @@ export default (state = {
         watchLater: [...state.watchLater, action.show]
       }
 
+    case 'REMOVE_FROM_WATCH_LATER':
+      return {
+        ...state,
+        watchLater: [
+          ...state.watchLater.slice(0, action.watchLaterIndex),
+          ...state.watchLater.slice(action.watchLaterIndex + 1)
+        ]
+      }
+
     default:
       return state;
   }
